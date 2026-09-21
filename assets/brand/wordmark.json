@@ -1,0 +1,127 @@
+{
+  "source": "assets/brand/source/wordmark-black.png",
+  "viewBox": [
+    0,
+    0,
+    2000,
+    227
+  ],
+  "viewBox_offset_from_source": [
+    0,
+    0
+  ],
+  "units": "source pixels",
+  "letters": {
+    "l-t": [
+      0.0,
+      4.97,
+      230.62,
+      213.92
+    ],
+    "l-a": [
+      203.52,
+      3.97,
+      269.07,
+      214.92
+    ],
+    "l-b": [
+      507.78,
+      4.97,
+      239.23,
+      213.92
+    ],
+    "l-o": [
+      782.03,
+      0.0,
+      283.07,
+      224.66
+    ],
+    "l-u": [
+      1111.01,
+      4.97,
+      251.0,
+      221.95
+    ],
+    "l-k": [
+      1403.08,
+      4.1,
+      205.84,
+      215.68
+    ],
+    "l-h": [
+      1651.27,
+      4.97,
+      263.42,
+      213.92
+    ],
+    "l-i": [
+      1974.76,
+      4.97,
+      25.24,
+      213.92
+    ]
+  },
+  "ink_bbox": [
+    0.0,
+    0.0,
+    2000.0,
+    226.92
+  ],
+  "stroke_thickness": 26.1,
+  "stroke": {
+    "t_stem": 26.1,
+    "vertical_stems": {
+      "l-t": [
+        26.1
+      ],
+      "l-b": [
+        25.53
+      ],
+      "l-u": [
+        25.62,
+        25.38
+      ],
+      "l-h": [
+        25.14,
+        24.9
+      ]
+    },
+    "vertical_stem_mean": 25.44,
+    "horizontal_bars": {
+      "l-t": [
+        22.3
+      ],
+      "l-b": [
+        22.3,
+        23.11,
+        22.95
+      ],
+      "l-h": [
+        24.42
+      ]
+    },
+    "horizontal_bar_mean": 23.02,
+    "i_stem_as_cropped_in_source": 25.24
+  },
+  "cap_top_y": 4.97,
+  "baseline_y": 218.89,
+  "cap_height": 213.92,
+  "segments": {
+    "lines": 53,
+    "cubics": 28
+  },
+  "outline_quality": {
+    "cubics_with_inflection": 0,
+    "max_tangent_break_at_smooth_joins_deg": 0.0,
+    "segments_shorter_than_2px": 0
+  },
+  "svg_bytes": 2090,
+  "verification": {
+    "renderer": "Google Chrome via Playwright, 2000x227, transparent background",
+    "mean_abs_diff_pct": 0.3605,
+    "iou_at_0.5": 0.98787,
+    "max_abs_diff": 0.8353,
+    "pixels_flipped_at_0.5": 1306,
+    "ink_pixels_source": 106643
+  }
+}
