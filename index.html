@@ -94,7 +94,7 @@
 
     <div class="hero__say">
       <p class="hero__statement">A new house of eyewear is being built. We are looking for those who will build&nbsp;it.</p>
-      <p class="hero__sub">The first eyewear house established by Ilya Taboukhi: precious materials and, for select clients, eyewear designed with them and made to their order.</p>
+      <p class="hero__sub">Eyewear in precious materials and, for select clients, designed with them and made to their order.</p>
       <div class="hero__cta">
         <a class="btn btn--bone" href="#apply"><span>Apply to join</span></a>
         <a class="link link--quiet" href="#house">Read about the house <span class="arr arr--down" aria-hidden="true"></span></a>
@@ -119,7 +119,7 @@
     </div>
     <div class="house__p2 prose" data-reveal style="--d:1">
       <p>We are at the very start. There is no archive to lean on and no habit to follow; there is only a standard to set. This page exists for one reason: to find the people who will set it with us.</p>
-      <p class="aside">This page is an invitation, not a storefront. Nothing here is for sale.</p>
+      <p class="aside">An invitation, not a storefront. Nothing here is for sale.</p>
     </div>
   </div>
 </section>
@@ -212,7 +212,7 @@
     <span class="hair" aria-hidden="true"></span>
     <h2 class="display apply__h">Apply to the house.</h2>
     <div class="apply__intro prose">
-      <p>Tell us who you are and show us what you have made. We read every application with care and in confidence, and we write back to those we would like to meet. Where and how we would work together is the first thing we will discuss.</p>
+      <p>Tell us who you are and show us your work. We read every application with care and in confidence, and we write back to those we would like to meet. Where and how we would work together is the first thing we will discuss.</p>
     </div>
 
     <div class="sheet" data-ground="bone" data-sheet>
@@ -221,9 +221,9 @@
         <svg viewBox="0 0 2000 227" aria-hidden="true" focusable="false"><use href="#p-wm"/></svg>
       </div>
 
-      <p class="sheet__flag cap" data-demo-only hidden>Preview <span class="dash" aria-hidden="true"></span> this form is in demonstration mode. Nothing is sent or stored yet.</p>
+      <p class="sheet__flag cap" data-demo-only hidden>Preview <span class="dash" aria-hidden="true"></span> this form is in demonstration mode. Nothing is sent to us yet.</p>
 
-      <form class="form" id="application" novalidate data-form>
+      <form class="form" id="application" method="post" action="#apply" novalidate data-form>
         <noscript><p class="form__note">This form needs JavaScript to send your application.</p></noscript>
 
         <p class="form__note" id="form-note">Only your name, email, discipline and a way to see your work are needed. It takes about two minutes.</p>
@@ -241,7 +241,7 @@
             <div class="f" data-field="email">
               <label for="f-email" class="cap">Email</label>
               <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" required maxlength="254" aria-describedby="f-email-help f-email-err">
-              <p class="f__help" id="f-email-help">We reply here, and nowhere else.</p>
+              <p class="f__help" id="f-email-help">If we write, it will be to this address.</p>
               <p class="f__err" id="f-email-err"></p>
             </div>
             <div class="f" data-field="phone">
@@ -278,7 +278,7 @@
               <p class="f__err" id="f-disc-err"></p>
             </div>
             <div class="f" data-field="current_role">
-              <label for="f-role" class="cap">Current or most recent position <span class="opt">optional</span></label>
+              <label for="f-role" class="cap">Most recent position <span class="opt">optional</span></label>
               <input id="f-role" name="current_role" type="text" autocomplete="organization-title" enterkeyhint="next" maxlength="120" aria-describedby="f-role-help">
               <p class="f__help" id="f-role-help">Title, and house or studio. Independent is a perfectly good answer.</p>
             </div>
@@ -289,13 +289,13 @@
             <div class="grid2">
               <div class="f" data-field="portfolio_url">
                 <label for="f-url" class="cap">Portfolio, website or profile</label>
-                <input id="f-url" name="portfolio_url" type="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" enterkeyhint="next" placeholder="https://" maxlength="300" aria-describedby="f-url-err">
+                <input id="f-url" name="portfolio_url" type="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" enterkeyhint="next" placeholder="https://" maxlength="300" aria-describedby="f-url-err pair-err">
                 <p class="f__err" id="f-url-err"></p>
               </div>
               <div class="f f--file" data-field="cv">
                 <span class="cap f__label" id="f-cv-label">CV or portfolio</span>
-                <input class="vh" id="f-cv" name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-labelledby="f-cv-label" aria-describedby="f-cv-help f-cv-err">
-                <label class="drop" for="f-cv" data-drop><span class="drop__cta">Attach a file</span></label>
+                <input class="vh" id="f-cv" name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-labelledby="f-cv-label f-cv-cta" aria-describedby="f-cv-help f-cv-err pair-err">
+                <label class="drop" for="f-cv" data-drop><span class="drop__cta" id="f-cv-cta">Attach a file</span></label>
                 <div class="file" data-file hidden>
                   <span class="file__name" data-file-name></span>
                   <span class="file__size" data-file-size></span>
@@ -313,7 +313,7 @@
           <legend class="cap">A note</legend>
           <div class="f" data-field="message">
             <label for="f-msg" class="cap">What you would bring to the house <span class="opt">optional</span></label>
-            <textarea id="f-msg" name="message" rows="4" maxlength="1500" aria-describedby="f-msg-help f-msg-count"></textarea>
+            <textarea id="f-msg" name="message" rows="4" maxlength="1500" enterkeyhint="enter" aria-describedby="f-msg-help f-msg-count"></textarea>
             <p class="f__help" id="f-msg-help">A line or two is enough: what you make or lead, and the standard you hold it to.</p>
             <p class="f__help f__count" id="f-msg-count" data-count hidden></p>
           </div>
@@ -327,7 +327,7 @@
         <div class="f f--check" data-field="consent">
           <label class="check" for="f-consent">
             <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-            <span>I agree that TABOUKHI may keep and use the information and documents I provide here to consider me for a role with the house, and to contact me about it. I can ask for them to be deleted at any time.</span>
+            <span>I agree that TABOUKHI may keep and use the information and documents I provide here to consider me for a role with the house, and to contact me about it.<span data-contact-line hidden> I can ask for them to be deleted at any time by writing to <span data-contact></span>.</span></span>
           </label>
           <p class="f__err" id="f-consent-err"></p>
         </div>
@@ -335,7 +335,7 @@
         <p class="form__alert" role="alert" data-alert></p>
 
         <div class="form__end">
-          <button class="btn btn--onyx btn--wide" type="submit" data-submit><span data-submit-label>Send application</span><i class="btn__bar" aria-hidden="true"></i></button>
+          <button class="btn btn--onyx btn--wide" type="submit" data-submit disabled><span data-submit-label>Send application</span><i class="btn__bar" aria-hidden="true"></i></button>
           <p class="form__fine">Read in confidence. Your application is seen only by those involved in hiring at TABOUKHI, and we will not contact your current employer, or anyone else, without your permission.</p>
           <p class="form__fine form__fine--demo cap" data-demo-only hidden>Preview <span class="dash" aria-hidden="true"></span> nothing is sent yet.</p>
           <button type="button" class="textbtn form__clear" data-clear>Clear the form</button>

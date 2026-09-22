@@ -12,6 +12,7 @@
 
 PNG renders go through system Chrome (Playwright), the same engine the page is judged in.
 """
+import base64
 import pathlib
 import re
 
@@ -22,6 +23,8 @@ from playwright.sync_api import sync_playwright
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BRAND = ROOT / "assets" / "brand"
 ONYX, BONE = "#020202", "#F4F2ED"
+# Inlined: an about:blank page may not load a file:// font, and the card fell back to Times.
+JOST = base64.b64encode((ROOT / "assets/fonts/jost.woff2").read_bytes()).decode()
 
 svg = (BRAND / "wordmark.svg").read_text()
 paths = dict(re.findall(r'<path id="(l-\w)" d="([^"]+)"', svg))
@@ -61,7 +64,7 @@ html,body{{margin:0;width:1200px;height:630px;background:radial-gradient(120% 90
 svg{{position:absolute;left:96px;top:258px;width:1008px;overflow:visible}}
 i{{position:absolute;background:#2B2B29}} .h{{left:0;right:0;height:1px}} .v{{top:0;width:1px;height:373px}}
 p{{position:absolute;left:96px;margin:0;font:500 15px/1 'Jost';letter-spacing:.24em;text-transform:uppercase;color:#8E8D89}}
-@font-face{{font-family:Jost;src:url('{(ROOT / "assets/fonts/jost.woff2").as_uri()}');font-weight:400 500}}
+@font-face{{font-family:Jost;src:url(data:font/woff2;base64,{JOST}) format('woff2');font-weight:400 500}}
 </style>
 <i class="h" style="top:260.5px"></i><i class="h" style="top:368.3px"></i>
 {''.join(f'<i class="v" style="left:{96 + 1008 * x / 100:.1f}px"></i>' for x in (0, 10.176, 25.389, 39.1015, 55.5505, 70.154, 82.5635, 98.738))}
@@ -81,6 +84,7 @@ with sync_playwright() as p:
     page = browser.new_page(viewport={"width": 1200, "height": 630}, device_scale_factor=1)
     page.set_content(og)
     page.evaluate("document.fonts.ready")
+    assert page.evaluate("[...document.fonts].every(f => f.status === 'loaded')"), "share card font did not load"
     page.wait_for_timeout(300)
     page.screenshot(path=str(ROOT / "assets" / "og.png"))
     print(f"  {'og.png':24} {(ROOT / 'assets' / 'og.png').stat().st_size:6} B")

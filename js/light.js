@@ -17,7 +17,9 @@ export function initLight() {
   const add = (sel, make) => { const el = document.querySelector(sel); if (el) hosts.push({ el, on: false, cur: null, ...make(el) }); };
 
   add('[data-light="hero"]', (el) => ({
-    target: () => clamp(lerp(0.2, 0.9, clamp(scrollY / (innerHeight * 0.9))) + lean),
+    // Rests where the markup put it (0.38 = translate(-312)), so the first scroll moves
+    // the band on from there instead of snapping it back.
+    target: () => clamp(lerp(0.38, 0.9, clamp(scrollY / (innerHeight * 0.9))) + lean),
     apply: band(el.querySelector('linearGradient')),
   }));
   add('[data-light="ring"]', (el) => ({
@@ -38,7 +40,7 @@ export function initLight() {
     for (const h of hosts) {
       if (!h.on) continue;
       const t = h.target();
-      if (h.cur === null) h.cur = t;
+      if (h.cur === null) { h.cur = t; h.apply(t); continue; }   // a host arrived at by a jump is lit at once
       const d = t - h.cur;
       if (Math.abs(d) < 0.0005) continue;
       h.cur += d * 0.085;

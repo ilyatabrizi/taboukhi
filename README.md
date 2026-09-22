@@ -36,9 +36,21 @@ Going live: set `mode: 'endpoint'` and `endpoint` to a receiver on the house's o
 `413` too large, `429` rate-limited, `422 { fieldErrors }` invalid), remove the robots meta
 line, set `maxFileMB` to what the host really accepts. No interface change is needed.
 
+The page is served from `https://ilyatabrizi.github.io` (or the final domain), so the
+receiver is cross-origin: **every** response, 4xx and 5xx included, must carry
+`Access-Control-Allow-Origin` for that origin. Without it the browser reports a network
+failure even though the POST arrived, and a retry stores a duplicate. No preflight is sent.
+Treat a repeat of the same email + discipline within a few minutes as one application.
+`fieldErrors` keys the form can mark: `full_name email phone discipline portfolio_url
+consent cv`; any other key's message is appended to the alert.
+
 Fields: `full_name`* `email`* `phone` `location` `discipline`* `current_role`
 `portfolio_url` / `cv` (one of the two)* `message` `consent`* + `consent_version`, `meta`
 (`elapsed_ms`, honeypot flag — the server should quarantine, never silently drop).
+All eight text fields are always present, empty if unused; `discipline` is the option slug
+(e.g. `optics-fit`); `phone` arrives with ASCII digits; `consent` is the string `true`.
+Set `fallbackEmail` in `js/config.js` before going live: it completes the consent sentence
+("…deleted at any time by writing to …") and appears after a second failed send.
 
 `?demo=fail`, `?demo=slow`, `?demo=offline` force each state in demo mode.
 
