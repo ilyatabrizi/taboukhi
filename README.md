@@ -9,22 +9,28 @@ Static HTML + CSS + ES modules. No framework, no build step, no third-party requ
     python3 e2e.py              # end-to-end checks through system Chrome
     python3 e2e.py https://ilyatabrizi.github.io/taboukhi/
 
-## The idea — "Elevation"
+## The design — v2, "glass over their film" (2026-09-22)
 
-The wordmark is the building. It is drawn on onyx the way an architect draws a facade, and
-the left edge of each of its eight letters is a column line (the Name Grid, `--x-a … --x-i`
-in `css/main.css`) that the whole page hangs from. There is no photography, so there is one
-light instead: a single slanted band, parallel to the A's left leg, that crosses the hero
-letters, turns on the machined O (Fig. 2) and ends resting on the engraved name in the
-footer. It moves only when the reader scrolls (`js/light.js`); nothing loops.
+v1 ("Elevation", a serif editorial page with a drawn wordmark and a metal O) was rejected
+on sight: *"more minimal, really iOS, glassmorphism, less context, focused on the form."*
+Ilya kept one thing from it: **the K** — the stemless K of the wordmark, two detached strokes.
 
-- Onyx `#020202`, Bone `#F4F2ED` (one token — `#FFFFFF` gives the palette file's literal
-  white), and a titanium-grey scale `--ti-50 … --ti-900` in place of the burnt red.
-  **"Titanium" is a colour name in the code only. It never appears in copy, alt text or
-  meta tags, where it would read as a claim about the product.** `e2e.py` enforces this.
-- Newsreader (one serif, three optical sizes) says everything the house says; Jost carries
-  only labels, markers and buttons. `--font-caption` makes serif-only a one-line change.
-- Hard cuts between grounds. No radius, no shadow, no blur.
+- **Their film runs behind everything.** `assets/media/source/film-original.mp4` (their
+  5 s temple-arm shot) → `scripts/build_film.py` → a 16 s seamless loop: the first 3.75 s
+  eased out and back with optical-flow in-betweens, so it never jumps or bounces.
+  1920 (desktop) / 1280 (phone), H.264, no audio, fast-start. A still loads first.
+- **Everything in front of it is glass** (iOS 26): floating capsule controls, a glass sheet,
+  a scroll-edge blur under the controls. Blur + saturate + a brightness clamp; an opaque
+  fallback where backdrop-filter is missing.
+- **The K, in liquid glass**, placed on the moving metal: the metal always crosses 38–56%
+  of the frame's height, so the K is positioned from that geometry (see `css/main.css`).
+- **The phone's own typeface**: SF Pro on Apple devices; Inter self-hosted for the rest.
+- **The form is the page.** On desktop it is on the first screen; on a phone one tap on
+  Apply. Grouped rows like iOS Settings, discipline chips, a Link/File segmented control,
+  a consent switch.
+- Onyx, bone, titanium greys. **"Titanium" is a colour name in the code only** — never in
+  copy, alt text or meta tags, where it would read as a claim about the product. `e2e.py`
+  enforces it.
 
 ## The form
 
@@ -56,7 +62,7 @@ Set `fallbackEmail` in `js/config.js` before going live: it completes the consen
 
 ## Placeholders awaiting the owner
 
-- The nine disciplines and their one-line descriptions, and the three "What we ask" items.
+- The nine disciplines.
 - Process promises: "We read every application with care and in confidence, and we write
   back to those we would like to meet", the "Read in confidence…" note, and the consent
   sentence. Personal data (CVs) will need a privacy notice and a retention period.
@@ -68,6 +74,7 @@ Set `fallbackEmail` in `js/config.js` before going live: it completes the consen
 - `scripts/trace_logo.py` — the supplied 2000px PNG → `assets/brand/wordmark.svg` (2 KB,
   exact straight edges, 0.36% mean pixel difference, the K kept as two detached strokes).
   If vector artwork exists, it should replace the trace.
-- `scripts/build_assets.py` — O masks for Fig. 2, K favicon, dither tile, share card.
-- `scripts/fetch_fonts.py` — self-hosted, subset, weight-cut variable fonts + fallback metrics.
+- `scripts/build_film.py` — the background loop, from their film.
+- `scripts/build_assets.py` — the K mask, favicons, share card (cut from their still).
+- `scripts/fetch_fonts.py` — Inter, subset and weight-cut, + fallback metrics.
 - `scripts/shots.py` — viewport screenshots of every section.

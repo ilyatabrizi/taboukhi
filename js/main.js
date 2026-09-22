@@ -1,51 +1,69 @@
-import { initLight } from './light.js';
 import { initApply } from './apply.js';
 
-window.__tbk = true;   // tells the inline guard in <head> that the reveals have an owner
+window.__tbk = true;
 
-// ── Masthead: backed by whichever ground lies under it, clear over the hero, away while the
-// reader moves down and back on the way up. Recomputed on load, hash and resize as well as
-// scroll — a deep link to #apply must be right without anyone scrolling.
-function initMast() {
-  const mast = document.querySelector('[data-mast]');
-  if (!mast) return;
-  const grounds = [...document.querySelectorAll('main > [data-ground], footer[data-ground]')];
-  const heroMark = document.querySelector('.hero__mark');
-  let queued = false, lastY = scrollY;
+// ── The film. Muted as a property before play() (the attribute alone is not always honoured),
+// retried on every signal a strict autoplay policy lifts on, and never left as a silent
+// still: if it will not play, the button shows Play.
+function initFilm() {
+  const v = document.querySelector('[data-film]');
+  const btn = document.querySelector('[data-film-toggle]');
+  if (!v || !btn) return;
+  let wanted = true;
+  v.muted = true; v.defaultMuted = true; v.playsInline = true;
+  v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
 
-  const paint = () => {
-    queued = false;
-    const h = mast.offsetHeight, y = scrollY;
-    let on = 'onyx';
-    for (const el of grounds) { const b = el.getBoundingClientRect(); if (b.top <= h / 2 && b.bottom > h / 2) on = el.dataset.ground; }
-    if (mast.dataset.on !== on) mast.dataset.on = on;
-    mast.toggleAttribute('data-docked', !!heroMark && heroMark.getBoundingClientRect().bottom < h);
-    if (y < h * 2 || y < lastY - 6) mast.removeAttribute('data-away');
-    else if (y > lastY + 6) mast.setAttribute('data-away', '');
-    if (Math.abs(y - lastY) > 6) lastY = y;
+  const show = () => {
+    const paused = v.paused;
+    btn.setAttribute('aria-pressed', String(paused));
+    btn.setAttribute('aria-label', paused ? 'Play the film' : 'Pause the film');
   };
-  const ask = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+  const play = () => { if (!wanted || document.hidden) return; const p = v.play(); if (p) p.catch(() => show()); };
+  v.addEventListener('playing', () => { v.classList.add('is-on'); show(); });
+  v.addEventListener('pause', show);
+  ['loadedmetadata', 'canplay'].forEach((t) => v.addEventListener(t, play));
+  const kick = () => { play(); ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach((t) => removeEventListener(t, kick)); };
+  ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach((t) => addEventListener(t, kick, { passive: true }));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) play(); });
+  btn.addEventListener('click', () => { if (v.paused) { wanted = true; play(); } else { wanted = false; v.pause(); } });
+  if (v.readyState >= 2) play();
+  play();
+}
 
+// ── The scroll edge under the floating controls: on once anything scrolls beneath them.
+function initEdge() {
+  const edge = document.querySelector('[data-edge]');
+  if (!edge) return;
+  let queued = false;
+  const paint = () => { queued = false; edge.toggleAttribute('data-on', scrollY > 8); };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(paint); } }, { passive: true });
   paint();
-  addEventListener('scroll', ask, { passive: true });
-  addEventListener('resize', ask, { passive: true });
-  addEventListener('hashchange', ask);
-  addEventListener('load', ask);
-  document.fonts?.ready.then(ask);
 }
 
-// ── Arrivals. CSS hides [data-reveal] only under .js, so without this file — or without
-// IntersectionObserver — everything simply stands where it is.
-function initReveals() {
-  const els = [...document.querySelectorAll('[data-reveal]')];
-  if (!('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('is-in')); return; }
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-  els.forEach((el) => io.observe(el));
+// ── The glass K catches a light that follows the pointer. Fine pointers only; at rest
+// the highlight sits top-left, where the markup puts it.
+function initKGlass() {
+  const k = document.querySelector('[data-kglass]');
+  if (!k || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let raf = 0, x = 0, y = 0;
+  addEventListener('pointermove', (e) => {
+    x = e.clientX; y = e.clientY;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const r = k.getBoundingClientRect();
+      const mx = Math.min(100, Math.max(0, ((x - r.left) / r.width) * 100));
+      const my = Math.min(100, Math.max(0, ((y - r.top) / r.height) * 100));
+      k.style.setProperty('--mx', `${(28 + (mx - 28) * 0.5).toFixed(1)}%`);
+      k.style.setProperty('--my', `${(18 + (my - 18) * 0.5).toFixed(1)}%`);
+    });
+  }, { passive: true });
 }
 
-try { initMast(); } catch (err) { console.error(err); }
-try { initReveals(); } catch (err) { document.documentElement.classList.remove('js'); console.error(err); }
-try { initLight(); } catch (err) { console.error(err); }
+// iOS shows :active only when the document listens for touches.
+document.addEventListener('touchstart', () => {}, { passive: true });
+
+try { initFilm(); } catch (err) { console.error(err); }
+try { initEdge(); } catch (err) { console.error(err); }
+try { initKGlass(); } catch (err) { console.error(err); }
 try { initApply(); } catch (err) { console.error(err); }

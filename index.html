@@ -3,29 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TABOUKHI — Founding appointments</title>
-<meta name="description" content="TABOUKHI is the first eyewear brand established by Ilya Taboukhi. The house is assembling its founding team — read about the work, and apply.">
+<title>TABOUKHI — Join the founding team</title>
+<meta name="description" content="TABOUKHI is the first eyewear brand established by Ilya Taboukhi. Apply to join the founding team.">
 <!-- PREVIEW: the application form is in demonstration mode (js/config.js). Remove this
      line on the day a real endpoint is switched on; e2e.py checks the two agree. -->
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#020202">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="TABOUKHI — Founding appointments">
-<meta property="og:description" content="A new house of eyewear is being built. We are looking for those who will build it.">
-<meta property="og:image" content="https://ilyatabrizi.github.io/taboukhi/assets/og.png">
+<meta property="og:title" content="TABOUKHI — Join the founding team">
+<meta property="og:description" content="The first eyewear brand established by Ilya Taboukhi is assembling its founding team.">
+<meta property="og:image" content="https://ilyatabrizi.github.io/taboukhi/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/brand/favicon-48.png" sizes="48x48" type="image/png">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/main.css">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__tbk)document.documentElement.classList.remove('js')},4000)</script>
 <link rel="modulepreload" href="js/main.js">
-<link rel="modulepreload" href="js/light.js">
 <link rel="modulepreload" href="js/apply.js">
 <link rel="modulepreload" href="js/adapter.js">
 <link rel="modulepreload" href="js/config.js">
@@ -33,7 +30,6 @@
 </head>
 <body>
 
-<!-- The wordmark, traced from the supplied artwork (scripts/trace_logo.py). Defined once. -->
 <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
     <path id="p-k" d="M1403.08 140.94V116.42C1403.08 113.61 1404.92 110.64 1407.24 109.12L1558.69 9.28C1566.48 4.15 1571.43 3.77 1582.23 4.25L1608.64 5.44L1403.08 140.94ZM1555.2 211.35L1452.53 139.48L1472.75 126.37C1473.98 125.57 1475.37 125.61 1476.6 126.48L1608.92 219.1L1581.97 219.76C1570.54 220.04 1564.49 217.85 1555.2 211.35Z"/>
@@ -47,338 +43,192 @@
       <path d="M1914.69 218.89H1889.79V125.71H1676.41V218.89H1651.27V4.97H1676.41V101.29H1889.79V4.97H1914.69V218.89Z"/>
       <path d="M2000 218.89H1974.76V4.97H2000V218.89Z"/>
     </g>
+    <linearGradient id="g-rim" gradientUnits="userSpaceOnUse" x1="1403" y1="4" x2="1609" y2="220">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#fff" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".55"/>
+    </linearGradient>
   </defs>
 </svg>
 
-<a class="skip" href="#apply">Skip to the application</a>
+<a class="skip" href="#application">Skip to the application</a>
 
-<header class="mast" data-mast>
-  <a class="mast__brand" href="#top" aria-label="TABOUKHI — back to the top">
-    <svg viewBox="0 0 2000 227" aria-hidden="true" focusable="false"><use href="#p-wm"/></svg>
+<!-- Their own film: the temple arm and its engraving, eased out and back (scripts/build_film.py). -->
+<div class="film" aria-hidden="true">
+  <img class="film__still" src="assets/media/film-1280.webp" srcset="assets/media/film-1280.webp 1280w, assets/media/film-1920.webp 1920w" sizes="100vmax" alt="" fetchpriority="high">
+  <video class="film__video" muted playsinline loop autoplay preload="auto" disablepictureinpicture disableremoteplayback data-film>
+    <source src="assets/media/film-1920.mp4" type="video/mp4" media="(min-width: 1080px)">
+    <source src="assets/media/film-1280.mp4" type="video/mp4">
+  </video>
+  <div class="film__scrim"></div>
+</div>
+
+<div class="edge" aria-hidden="true" data-edge></div>
+
+<header class="bar">
+  <a class="glass control home" href="#top" aria-label="TABOUKHI, back to the top">
+    <svg class="home__wm" viewBox="0 0 2000 227" aria-hidden="true" focusable="false"><use href="#p-wm"/></svg>
   </a>
-  <a class="mast__apply cap" href="#apply">Apply</a>
+  <button class="glass control round" type="button" aria-pressed="false" aria-label="Pause the film" data-film-toggle>
+    <svg class="ico ico--pause" viewBox="0 0 20 20" aria-hidden="true"><rect x="5.2" y="4.5" width="3.2" height="11" rx="1.2"/><rect x="11.6" y="4.5" width="3.2" height="11" rx="1.2"/></svg>
+    <svg class="ico ico--play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6.8 4.9v10.2c0 .8.9 1.3 1.6.9l8-5.1c.6-.4.6-1.3 0-1.7l-8-5.1c-.7-.5-1.6 0-1.6.8Z"/></svg>
+  </button>
 </header>
 
-<main>
+<main class="page" id="top">
 
-<!-- ─────────────────────────── Fig. 1 — the name, in elevation ─────────────────────────── -->
-<section class="hero" id="top" data-ground="onyx">
-  <div class="hero__grid frame">
-    <p class="hero__kicker cap"><span class="hide-s">Eyewear <span class="dash" aria-hidden="true"></span></span> Founding appointments</p>
+  <section class="intro" aria-labelledby="intro-h">
+    <div class="kglass" aria-hidden="true" data-kglass>
+      <div class="kglass__body"></div>
+      <svg class="kglass__rim" viewBox="1403.08 4.1 205.84 215.68" focusable="false"><use href="#p-k"/></svg>
+    </div>
+    <div class="intro__say">
+      <p class="eyebrow">Founding team</p>
+      <h1 class="title" id="intro-h">Build TABOUKHI with&nbsp;us.</h1>
+      <p class="lede">TABOUKHI is the first eyewear brand established by Ilya Taboukhi. Precious materials, and eyewear select clients design with&nbsp;us.</p>
+      <a class="pill pill--primary intro__cta" href="#application">Apply</a>
+    </div>
+  </section>
 
-    <div class="hero__lines" aria-hidden="true">
-      <i style="--x:0"></i><i style="--x:10.176"></i><i style="--x:25.389"></i><i style="--x:39.1015"></i>
-      <i style="--x:55.5505"></i><i style="--x:70.154"></i><i style="--x:82.5635"></i><i style="--x:98.738"></i>
+  <section class="glass sheet" id="application" aria-labelledby="sheet-h" data-sheet>
+    <div class="sheet__head">
+      <h2 class="sheet__title" id="sheet-h" tabindex="-1">Application</h2>
+      <p class="sheet__sub">About two minutes. Every application is read in confidence.</p>
+      <p class="flag" data-demo-only hidden><span class="flag__dot" aria-hidden="true"></span>Preview. Nothing is sent to us yet.</p>
     </div>
 
-    <h1 class="hero__mark">
-      <span class="hero__rule hero__rule--cap" aria-hidden="true"></span>
-      <span class="hero__rule hero__rule--base" aria-hidden="true"></span>
-      <svg viewBox="0 0 2000 227" role="img" aria-label="TABOUKHI" data-light="hero">
-        <defs>
-          <linearGradient id="ti-metal" gradientUnits="userSpaceOnUse" x1="-1400" y1="0" x2="3400" y2="0" gradientTransform="translate(-312 0) rotate(32.1 1000 113)">
-            <stop offset="0" stop-color="#9F9E99"/>
-            <stop offset=".36" stop-color="#9F9E99"/>
-            <stop offset=".45" stop-color="#C3C2BD"/>
-            <stop offset=".49" stop-color="#EFEDE8"/>
-            <stop offset=".5" stop-color="#F4F2ED"/>
-            <stop offset=".51" stop-color="#EFEDE8"/>
-            <stop offset=".55" stop-color="#C3C2BD"/>
-            <stop offset=".64" stop-color="#9F9E99"/>
-            <stop offset="1" stop-color="#9F9E99"/>
-          </linearGradient>
-        </defs>
-        <use href="#p-wm" fill="url(#ti-metal)"/>
-      </svg>
-    </h1>
+    <form class="form" id="application-form" method="post" action="#application" novalidate data-form>
+      <noscript><p class="note">This form needs JavaScript to send your application.</p></noscript>
+      <p class="status" role="status" aria-live="polite" data-status></p>
+      <p class="vh" role="status" aria-live="polite" data-announce></p>
 
-    <div class="hero__say">
-      <p class="hero__statement">A new house of eyewear is being built. We are looking for those who will build&nbsp;it.</p>
-      <p class="hero__sub">Eyewear in precious materials and, for select clients, designed with them and made to their order.</p>
-      <div class="hero__cta">
-        <a class="btn btn--bone" href="#apply"><span>Apply to join</span></a>
-        <a class="link link--quiet" href="#house">Read about the house <span class="arr arr--down" aria-hidden="true"></span></a>
-      </div>
-    </div>
-
-    <div class="hero__foot">
-      <p class="cap">Established by Ilya Taboukhi</p>
-      <p class="cap hero__fig">Fig. 1 <span class="dash" aria-hidden="true"></span> The name, in elevation</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────────────────── The house ────────────────────────────────────── -->
-<section class="sec sec--bone house" id="house" data-ground="bone">
-  <div class="frame ng">
-    <p class="marker cap" data-reveal>The house</p>
-    <span class="hair" data-reveal="rule" aria-hidden="true"></span>
-    <h2 class="display house__h" data-reveal>The first eyewear house of Ilya Taboukhi <span class="nb">— and</span> it is <em>only beginning.</em></h2>
-    <div class="house__p1 prose" data-reveal>
-      <p>TABOUKHI is the first eyewear brand established by Ilya Taboukhi. It starts from a plain belief: that something worn on the face, seen in every room and in every conversation, deserves the materials and the attention usually kept for the objects people lock away.</p>
-    </div>
-    <div class="house__p2 prose" data-reveal style="--d:1">
-      <p>We are at the very start. There is no archive to lean on and no habit to follow; there is only a standard to set. This page exists for one reason: to find the people who will set it with us.</p>
-      <p class="aside">An invitation, not a storefront. Nothing here is for sale.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────────────────── The work ─────────────────────────────────────── -->
-<section class="sec sec--onyx work" id="work" data-ground="onyx">
-  <div class="frame ng">
-    <p class="marker cap" data-reveal>The work</p>
-    <span class="hair" data-reveal="rule" aria-hidden="true"></span>
-    <h2 class="display work__h" data-reveal>Two things set the&nbsp;work apart.</h2>
-  </div>
-
-  <div class="frame work__body">
-    <div class="ring" aria-hidden="true" data-light="ring">
-      <div class="ring__stick">
-        <div class="ring__band">
-          <div class="ring__obj">
-            <div class="ring__layer ring__layer--edge"><b></b></div>
-            <div class="ring__layer ring__layer--face"><b></b></div>
+      <fieldset class="group">
+        <legend class="group__h">You</legend>
+        <div class="card">
+          <div class="row f" data-field="full_name">
+            <label class="row__label" for="f-name">Name</label>
+            <input class="row__input" id="f-name" name="full_name" type="text" autocomplete="name" autocapitalize="words" spellcheck="false" enterkeyhint="next" required maxlength="80" placeholder="Full name" aria-describedby="f-name-err">
+            <p class="f__err" id="f-name-err"></p>
+          </div>
+          <div class="row f" data-field="email">
+            <label class="row__label" for="f-email">Email</label>
+            <input class="row__input" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" required maxlength="254" placeholder="name@example.com" aria-describedby="f-email-err email-foot">
+            <p class="f__err" id="f-email-err"></p>
+          </div>
+          <div class="row f" data-field="phone">
+            <label class="row__label" for="f-phone">Phone</label>
+            <input class="row__input" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next" maxlength="24" placeholder="Optional" aria-describedby="f-phone-err">
+            <p class="f__err" id="f-phone-err"></p>
+          </div>
+          <div class="row f" data-field="location">
+            <label class="row__label" for="f-loc">Based in</label>
+            <input class="row__input" id="f-loc" name="location" type="text" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next" maxlength="100" placeholder="City, country (optional)">
           </div>
         </div>
-        <p class="cap ring__cap">Fig. 2 <span class="dash"></span> The O<br>A lens, before anything else.</p>
-      </div>
-    </div>
+        <p class="group__foot" id="email-foot">If we write, it will be to this address.</p>
+      </fieldset>
 
-    <div class="work__arts">
-      <article class="work__art" data-reveal>
-        <p class="cap work__tag">Material</p>
-        <h3 class="title">Precious by material.</h3>
-        <p>TABOUKHI eyewear is made from precious and costly materials. We choose them because the result is an object of real and lasting worth, not the look of it. Light should have something worth landing on.</p>
-      </article>
-
-      <article class="work__art" data-reveal>
-        <p class="cap work__tag">Commission</p>
-        <h3 class="title">Personal by design.</h3>
-        <p>For select clients, the house goes further. They can design and personalise their own eyewear with us: a pair conceived with one person, for one person, and made to their order. It asks for listening as much as for making.</p>
-      </article>
-    </div>
-  </div>
-
-  <div class="frame ng">
-    <p class="display display--m work__close" data-reveal>Work of this kind is only ever as good as <em>the people who do it.</em></p>
-  </div>
-</section>
-
-<!-- ────────────────────────────────────── The people ────────────────────────────────────── -->
-<section class="sec sec--bone people" id="people" data-ground="bone">
-  <div class="frame ng">
-    <p class="marker cap" data-reveal>The people</p>
-    <span class="hair" data-reveal="rule" aria-hidden="true"></span>
-    <h2 class="display people__h" data-reveal>We are looking for the few who are <em>exceptionally</em> good at what they do.</h2>
-    <div class="people__intro prose" data-reveal>
-      <p>TABOUKHI is assembling its founding team. We are interested in professionals at the top of their discipline: people with a record of serious work, the patience for detail, and the wish to build something from its first day. We would rather wait for the right person than fill a seat.</p>
-    </div>
-    <figure class="people__fig" data-reveal style="--d:1">
-      <svg viewBox="1403.08 4.1 205.84 215.68" aria-hidden="true" focusable="false"><use href="#p-k"/></svg>
-      <figcaption class="cap">Fig. 3 <span class="dash" aria-hidden="true"></span> The K. Two strokes that never touch, and still one letter.</figcaption>
-    </figure>
-  </div>
-
-  <div class="frame">
-    <h3 class="cap rows__h" id="disciplines-h" data-reveal>Where we are looking first</h3>
-    <ul class="rows" aria-labelledby="disciplines-h" data-rows>
-      <li><a class="row" href="#apply" data-discipline="design-studio"><span class="row__name">Design Studio</span><span class="row__blurb">Eyewear and technical designers who can carry a piece from the first sketch to a drawing a maker can build from, without losing the line.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="atelier"><span class="row__name">Atelier</span><span class="row__blurb">Makers, finishers and polishers trained at the bench, whether in eyewear, jewellery or watchmaking.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="precious-materials"><span class="row__name">Precious Materials</span><span class="row__blurb">Sourcing, selection and provenance. Knowing what to accept, and what to refuse.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="development-production"><span class="row__name">Development &amp; Production</span><span class="row__blurb">Engineers and prototypists who turn a design into an object that can be made again, to the same standard.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="optics-fit"><span class="row__name">Optics &amp; Fit</span><span class="row__blurb">Opticians and fitting specialists. A frame made for one face has to sit on it perfectly.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="private-clients"><span class="row__name">Private Clients &amp; Bespoke</span><span class="row__blurb">Advisors who guide a client through designing and personalising their own eyewear, with discretion and patience.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="image-communications"><span class="row__name">Image &amp; Communications</span><span class="row__blurb">Art direction, image and the written word. How the house looks, how it speaks, and when it says nothing.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="house-operations"><span class="row__name">House Operations</span><span class="row__blurb">Operations, finance, legal and logistics. The structure that lets everyone else work without compromise.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-      <li><a class="row" href="#apply" data-discipline="open"><span class="row__name">Open Application</span><span class="row__blurb">If your craft is not listed and you believe the house needs it, tell us why.</span><span class="row__go cap">Apply <span class="arr" aria-hidden="true"></span></span></a></li>
-    </ul>
-  </div>
-
-  <div class="frame">
-    <h3 class="cap asks__h" data-reveal>What we ask</h3>
-    <dl class="asks">
-      <div data-reveal><dt class="title">A finished hand</dt><dd>Work that is exact without being asked to be.</dd></div>
-      <div data-reveal style="--d:1"><dt class="title">A feeling for materials</dt><dd>Respect for what is precious, and the confidence to work with it.</dd></div>
-      <div data-reveal style="--d:2"><dt class="title">Discretion</dt><dd>A house like this is built on trust.</dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- ───────────────────────────────────── The application ─────────────────────────────────── -->
-<section class="sec sec--onyx apply" id="apply" data-ground="onyx">
-  <div class="frame ng">
-    <p class="marker cap">Application</p>
-    <span class="hair" aria-hidden="true"></span>
-    <h2 class="display apply__h">Apply to the house.</h2>
-    <div class="apply__intro prose">
-      <p>Tell us who you are and show us your work. We read every application with care and in confidence, and we write back to those we would like to meet. Where and how we would work together is the first thing we will discuss.</p>
-    </div>
-
-    <div class="sheet" data-ground="bone" data-sheet>
-      <div class="sheet__head">
-        <p class="cap" data-letterhead>Application</p>
-        <svg viewBox="0 0 2000 227" aria-hidden="true" focusable="false"><use href="#p-wm"/></svg>
-      </div>
-
-      <p class="sheet__flag cap" data-demo-only hidden>Preview <span class="dash" aria-hidden="true"></span> this form is in demonstration mode. Nothing is sent to us yet.</p>
-
-      <form class="form" id="application" method="post" action="#apply" novalidate data-form>
-        <noscript><p class="form__note">This form needs JavaScript to send your application.</p></noscript>
-
-        <p class="form__note" id="form-note">Only your name, email, discipline and a way to see your work are needed. It takes about two minutes.</p>
-        <p class="form__status" role="status" aria-live="polite" data-status></p>
-        <p class="vh" role="status" aria-live="polite" data-announce></p>
-
-        <fieldset class="fs">
-          <legend class="cap">About you</legend>
-          <div class="grid2">
-            <div class="f" data-field="full_name">
-              <label for="f-name" class="cap">Full name</label>
-              <input id="f-name" name="full_name" type="text" autocomplete="name" autocapitalize="words" spellcheck="false" enterkeyhint="next" required maxlength="80" aria-describedby="f-name-err">
-              <p class="f__err" id="f-name-err"></p>
-            </div>
-            <div class="f" data-field="email">
-              <label for="f-email" class="cap">Email</label>
-              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" enterkeyhint="next" required maxlength="254" aria-describedby="f-email-help f-email-err">
-              <p class="f__help" id="f-email-help">If we write, it will be to this address.</p>
-              <p class="f__err" id="f-email-err"></p>
-            </div>
-            <div class="f" data-field="phone">
-              <label for="f-phone" class="cap">Telephone <span class="opt">optional</span></label>
-              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next" maxlength="24" aria-describedby="f-phone-err">
-              <p class="f__err" id="f-phone-err"></p>
-            </div>
-            <div class="f" data-field="location">
-              <label for="f-loc" class="cap">Where you are based <span class="opt">optional</span></label>
-              <input id="f-loc" name="location" type="text" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next" maxlength="100" aria-describedby="f-loc-help">
-              <p class="f__help" id="f-loc-help">City and country.</p>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="fs">
-          <legend class="cap">Your work</legend>
-          <div class="grid2">
-            <div class="f" data-field="discipline">
-              <label for="f-disc" class="cap">Discipline</label>
-              <select id="f-disc" name="discipline" required aria-describedby="f-disc-help f-disc-err">
-                <option value="" selected disabled>Select a discipline</option>
-                <option value="design-studio">Design Studio</option>
-                <option value="atelier">Atelier</option>
-                <option value="precious-materials">Precious Materials</option>
-                <option value="development-production">Development &amp; Production</option>
-                <option value="optics-fit">Optics &amp; Fit</option>
-                <option value="private-clients">Private Clients &amp; Bespoke</option>
-                <option value="image-communications">Image &amp; Communications</option>
-                <option value="house-operations">House Operations</option>
-                <option value="open">Open Application</option>
-              </select>
-              <p class="f__help" id="f-disc-help">If none fits, choose Open Application.</p>
-              <p class="f__err" id="f-disc-err"></p>
-            </div>
-            <div class="f" data-field="current_role">
-              <label for="f-role" class="cap">Most recent position <span class="opt">optional</span></label>
-              <input id="f-role" name="current_role" type="text" autocomplete="organization-title" enterkeyhint="next" maxlength="120" aria-describedby="f-role-help">
-              <p class="f__help" id="f-role-help">Title, and house or studio. Independent is a perfectly good answer.</p>
-            </div>
-          </div>
-
-          <div class="pair" role="group" aria-labelledby="pair-h" aria-describedby="pair-err">
-            <p class="pair__h" id="pair-h">A link is enough. A file is welcome too.</p>
-            <div class="grid2">
-              <div class="f" data-field="portfolio_url">
-                <label for="f-url" class="cap">Portfolio, website or profile</label>
-                <input id="f-url" name="portfolio_url" type="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" enterkeyhint="next" placeholder="https://" maxlength="300" aria-describedby="f-url-err pair-err">
-                <p class="f__err" id="f-url-err"></p>
-              </div>
-              <div class="f f--file" data-field="cv">
-                <span class="cap f__label" id="f-cv-label">CV or portfolio</span>
-                <input class="vh" id="f-cv" name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-labelledby="f-cv-label f-cv-cta" aria-describedby="f-cv-help f-cv-err pair-err">
-                <label class="drop" for="f-cv" data-drop><span class="drop__cta" id="f-cv-cta">Attach a file</span></label>
-                <div class="file" data-file hidden>
-                  <span class="file__name" data-file-name></span>
-                  <span class="file__size" data-file-size></span>
-                  <button type="button" class="textbtn" data-file-remove>Remove</button>
-                </div>
-                <p class="f__help" id="f-cv-help" data-file-help>PDF or Word, up to 10 MB.</p>
-                <p class="f__err" id="f-cv-err"></p>
-              </div>
-            </div>
-            <p class="f__err f__err--pair" id="pair-err"></p>
-          </div>
-        </fieldset>
-
-        <fieldset class="fs">
-          <legend class="cap">A note</legend>
-          <div class="f" data-field="message">
-            <label for="f-msg" class="cap">What you would bring to the house <span class="opt">optional</span></label>
-            <textarea id="f-msg" name="message" rows="4" maxlength="1500" enterkeyhint="enter" aria-describedby="f-msg-help f-msg-count"></textarea>
-            <p class="f__help" id="f-msg-help">A line or two is enough: what you make or lead, and the standard you hold it to.</p>
-            <p class="f__help f__count" id="f-msg-count" data-count hidden></p>
-          </div>
-        </fieldset>
-
-        <div class="hp" aria-hidden="true">
-          <label for="f-ref">Leave this field empty</label>
-          <input id="f-ref" name="reference_code" type="text" tabindex="-1" autocomplete="off">
+      <fieldset class="group f" role="radiogroup" aria-required="true" aria-labelledby="disc-h" aria-describedby="disc-foot f-disc-err" data-field="discipline" id="f-disc">
+        <legend class="group__h" id="disc-h">Discipline</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="discipline" value="design-studio"><span>Design Studio</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="atelier"><span>Atelier</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="precious-materials"><span>Precious Materials</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="development-production"><span>Development &amp; Production</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="optics-fit"><span>Optics &amp; Fit</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="private-clients"><span>Private Clients &amp; Bespoke</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="image-communications"><span>Image &amp; Communications</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="house-operations"><span>House Operations</span></label>
+          <label class="chip"><input type="radio" name="discipline" value="open"><span>Open application</span></label>
         </div>
+        <p class="f__err" id="f-disc-err"></p>
+        <p class="group__foot" id="disc-foot">If none fits, choose Open application.</p>
+      </fieldset>
 
-        <div class="f f--check" data-field="consent">
-          <label class="check" for="f-consent">
-            <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-            <span>I agree that TABOUKHI may keep and use the information and documents I provide here to consider me for a role with the house, and to contact me about it.<span data-contact-line hidden> I can ask for them to be deleted at any time by writing to <span data-contact></span>.</span></span>
+      <fieldset class="group">
+        <legend class="group__h">Your work</legend>
+        <div class="seg" data-seg>
+          <label class="seg__opt"><input type="radio" name="work_as" value="link" checked><span>Link</span></label>
+          <label class="seg__opt"><input type="radio" name="work_as" value="file"><span>File</span></label>
+          <i class="seg__thumb" aria-hidden="true"></i>
+        </div>
+        <div class="card">
+          <div class="row f" data-field="portfolio_url" data-pane="link">
+            <label class="row__label" for="f-url">Link</label>
+            <input class="row__input" id="f-url" name="portfolio_url" type="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" enterkeyhint="next" placeholder="Portfolio, site or profile" maxlength="300" aria-describedby="f-url-err pair-err">
+            <p class="f__err" id="f-url-err"></p>
+          </div>
+          <div class="row row--file f" data-field="cv" data-pane="file" hidden>
+            <span class="row__label" id="f-cv-label">File</span>
+            <input class="vh" id="f-cv" name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-labelledby="f-cv-label f-cv-cta" aria-describedby="work-foot f-cv-err pair-err">
+            <label class="attach" for="f-cv" data-drop><span id="f-cv-cta">Attach a CV or portfolio</span></label>
+            <span class="file" data-file hidden>
+              <span class="file__name" data-file-name></span>
+              <span class="file__size" data-file-size></span>
+              <button type="button" class="file__x" data-file-remove aria-label="Remove the file"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8"/></svg></button>
+            </span>
+            <p class="f__err" id="f-cv-err"></p>
+          </div>
+          <div class="row f" data-field="current_role">
+            <label class="row__label" for="f-role">Position</label>
+            <input class="row__input" id="f-role" name="current_role" type="text" autocomplete="organization-title" enterkeyhint="next" maxlength="120" placeholder="Most recent (optional)">
+          </div>
+        </div>
+        <p class="f__err f__err--group" id="pair-err"></p>
+        <p class="group__foot" id="work-foot" data-file-help>A link is enough. Files: PDF or Word, up to 10&nbsp;MB.</p>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend class="group__h">A note <span class="group__opt">optional</span></legend>
+        <div class="card">
+          <div class="row row--area f" data-field="message">
+            <label class="vh" for="f-msg">A note about your work</label>
+            <textarea class="row__input" id="f-msg" name="message" rows="3" maxlength="1500" enterkeyhint="enter" placeholder="What you make or lead, and the standard you hold it to." aria-describedby="f-msg-count"></textarea>
+          </div>
+        </div>
+        <p class="group__foot" id="f-msg-count" data-count hidden></p>
+      </fieldset>
+
+      <div class="hp" aria-hidden="true">
+        <label for="f-ref">Leave this field empty</label>
+        <input id="f-ref" name="reference_code" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="group f" data-field="consent">
+        <div class="card">
+          <label class="row row--switch" for="f-consent">
+            <span class="row__text">TABOUKHI may keep and use what I send here to consider me for a role, and to contact me about it.<span data-contact-line hidden> I can ask for it to be deleted at any time by writing to <span data-contact></span>.</span></span>
+            <input class="switch" id="f-consent" name="consent" type="checkbox" role="switch" required aria-describedby="f-consent-err">
           </label>
-          <p class="f__err" id="f-consent-err"></p>
         </div>
-
-        <p class="form__alert" role="alert" data-alert></p>
-
-        <div class="form__end">
-          <button class="btn btn--onyx btn--wide" type="submit" data-submit disabled><span data-submit-label>Send application</span><i class="btn__bar" aria-hidden="true"></i></button>
-          <p class="form__fine">Read in confidence. Your application is seen only by those involved in hiring at TABOUKHI, and we will not contact your current employer, or anyone else, without your permission.</p>
-          <p class="form__fine form__fine--demo cap" data-demo-only hidden>Preview <span class="dash" aria-hidden="true"></span> nothing is sent yet.</p>
-          <button type="button" class="textbtn form__clear" data-clear>Clear the form</button>
-        </div>
-      </form>
-
-      <div class="done" data-done hidden>
-        <h3 class="display display--m" tabindex="-1" data-done-title>Your application is with us.</h3>
-        <p class="done__body">Thank you for the time, and for the trust. It will be read with care and in confidence. If there is a conversation to be had, we will write to you at <strong data-done-email></strong>.</p>
-        <p class="done__ref cap" data-done-ref hidden></p>
-        <p class="done__demo cap" data-demo-only hidden>Preview <span class="dash" aria-hidden="true"></span> this page is not yet receiving applications, and nothing was sent or stored.</p>
+        <p class="f__err" id="f-consent-err"></p>
       </div>
-    </div>
-  </div>
-</section>
 
+      <p class="alert" role="alert" data-alert></p>
+
+      <div class="send">
+        <button class="pill pill--primary pill--wide" type="submit" data-submit disabled>
+          <span data-submit-label>Send application</span>
+          <i class="spinner" aria-hidden="true"></i>
+        </button>
+        <p class="fine">Seen only by those involved in hiring at TABOUKHI. We will not contact your current employer, or anyone else, without your permission.</p>
+        <button type="button" class="textbtn" data-clear>Clear the form</button>
+      </div>
+    </form>
+
+    <div class="done" data-done hidden>
+      <div class="done__mark" aria-hidden="true"><svg viewBox="1403.08 4.1 205.84 215.68"><use href="#p-k"/></svg></div>
+      <h3 class="done__title" tabindex="-1" data-done-title>Application received.</h3>
+      <p class="done__body">Thank you<span data-done-name></span>. It will be read with care and in confidence. If there is a conversation to be had, we will write to you at <strong data-done-email></strong>.</p>
+      <p class="done__ref" data-done-ref hidden></p>
+      <p class="flag" data-demo-only hidden><span class="flag__dot" aria-hidden="true"></span>Preview. This page is not receiving applications yet, and nothing was sent.</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>© TABOUKHI. All rights reserved.</p>
+  </footer>
 </main>
-
-<!-- ──────────────────────────────────────── Footer ──────────────────────────────────────── -->
-<footer class="foot" data-ground="onyx">
-  <div class="frame">
-    <div class="foot__cols">
-      <p class="display display--m foot__thanks">Thank you for looking closely.</p>
-      <p class="foot__line">Eyewear. Established by Ilya Taboukhi.<br>Details submitted on this page are used only to consider your application.</p>
-      <p class="foot__links"><a class="link" href="#apply">Apply <span class="arr" aria-hidden="true"></span></a><a class="link" href="#top">Back to the top <span class="arr arr--up" aria-hidden="true"></span></a></p>
-    </div>
-    <svg class="foot__mark" viewBox="0 0 2000 227" role="img" aria-label="TABOUKHI" data-light="foot">
-      <defs>
-        <linearGradient id="ti-engrave" gradientUnits="userSpaceOnUse" x1="-1400" y1="0" x2="3400" y2="0" gradientTransform="translate(-1300 0) rotate(32.1 1000 113)">
-          <stop offset="0" stop-color="#262624"/>
-          <stop offset=".34" stop-color="#262624"/>
-          <stop offset=".45" stop-color="#5E5D59"/>
-          <stop offset=".5" stop-color="#A9A8A3"/>
-          <stop offset=".55" stop-color="#5E5D59"/>
-          <stop offset=".66" stop-color="#262624"/>
-          <stop offset="1" stop-color="#262624"/>
-        </linearGradient>
-      </defs>
-      <use href="#p-wm" fill="url(#ti-engrave)"/>
-    </svg>
-    <p class="cap foot__legal">© TABOUKHI. All rights reserved.</p>
-  </div>
-</footer>
 
 </body>
 </html>

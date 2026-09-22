@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
-"""Newsreader + Jost, self-hosted.
+"""Inter, self-hosted — the fallback for everything that is not an Apple device.
 
-The wordmark is the only large sans on the page, so everything the house SAYS is
-one serif: Newsreader, whose optical-size axis (6-72) makes the 80px headline and
-the 17px paragraph genuinely different drawings. Jost 400-500 carries only the
-functional caption layer (labels, markers, buttons) in tracked capitals, where a
-serif at 11px starts to read as a law firm. It sits behind --font-caption, so
-going serif-only is a one-line change.
+The page is set in the system face: SF Pro on iPhone, iPad and Mac, which is what
+makes it read as iOS. Android and Windows have no SF, so Inter (the closest open
+design, with its own optical-size axis) stands in. The stack lists SF first, so an
+Apple device never downloads this file.
 
 Google serves one file per unicode range; the page is English, so only the latin
-range is taken, then re-subset to what the page can render. Variable axes kept.
+range is taken, the weight axis is cut to what the page uses, then re-subset.
 
     python3 scripts/fetch_fonts.py
-
-Also prints metric-matched fallback @font-face blocks (size-adjust + overrides
-measured against Georgia / Arial) so the font swap causes no layout shift.
 """
 import pathlib
 import re
@@ -29,18 +24,13 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 GLYPHS = ("U+0020-007E,U+00A0-00FF,U+2009,U+200A,U+2013,U+2014,U+2018,U+2019,U+201C,U+201D,"
           "U+2022,U+2026,U+2190-2193,U+2212")
 FACES = [
-    ("newsreader", "Newsreader:opsz,wght@6..72,300..500", "wght=300:500"),
-    ("newsreader-italic", "Newsreader:ital,opsz,wght@1,6..72,300..500", "wght=300:500"),
-    ("jost", "Jost:wght@400..500", "wght=400:500"),
+    ("inter", "Inter:opsz,wght@14..32,400..700", "wght=400:700"),
 ]
 # English letter frequencies (per mille, space included) for the width comparison.
 FREQ = {" ": 182, "e": 102, "t": 75, "a": 65, "o": 62, "i": 57, "n": 57, "s": 53, "r": 50,
         "h": 50, "l": 33, "d": 33, "u": 23, "c": 22, "m": 20, "f": 18, "w": 17, "g": 16,
         "p": 15, "y": 15, "b": 12, "v": 8, "k": 6, ",": 10, ".": 10}
-FALLBACKS = {
-    "newsreader": [("Georgia", "/System/Library/Fonts/Supplemental/Georgia.ttf")],
-    "jost": [("Arial", "/System/Library/Fonts/Supplemental/Arial.ttf")],
-}
+FALLBACKS = {"inter": [("Arial", "/System/Library/Fonts/Supplemental/Arial.ttf")]}
 
 
 def get(url):
