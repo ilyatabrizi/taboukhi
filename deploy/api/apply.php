@@ -5,7 +5,7 @@
  * Takes the multipart POST sent by js/adapter.js (endpoint mode), checks it again on the
  * server, stores it OUTSIDE every web root, and emails it — CV attached — to NOTIFY_TO.
  *
- *   200 {ok:true, reference}        stored (and mailed, unless quarantined)
+ *   200 {ok:true, reference}        stored and mailed (suspected spam: flagged in the subject, filed under quarantine/)
  *   422 {ok:false, fieldErrors}     keys match the form: full_name email phone discipline portfolio_url consent cv
  *   413 too large · 429 too many (Retry-After) · 403 wrong origin · 405 not POST · 500 server
  *
@@ -144,10 +144,10 @@ function mime_word(string $s): string
     return '=?UTF-8?B?' . base64_encode(one_line($s)) . '?=';
 }
 
-function send_mail(array $app, ?array $file): bool
+function send_mail(array $app, ?array $file, string $flag = ''): bool
 {
     $b = 'tbk_' . bin2hex(random_bytes(12));
-    $subject = 'Application — ' . $app['discipline_name'] . ' — ' . $app['full_name'] . ' (' . $app['reference'] . ')';
+    $subject = $flag . 'Application — ' . $app['discipline_name'] . ' — ' . $app['full_name'] . ' (' . $app['reference'] . ')';
     $lines = [
         'New application for TABOUKHI.',
         '',
@@ -167,6 +167,7 @@ function send_mail(array $app, ?array $file): bool
         $app['message'] !== '' ? $app['message'] : '—',
         '',
         'Consent given (wording version ' . $app['consent_version'] . ').',
+        $flag !== '' ? 'Flagged as possible spam (hidden field filled, sent within seconds, or links/markup in the note). Check before replying.' : '',
         'Reply to this email to write to the applicant.',
     ];
     $text = implode("\r\n", $lines);
@@ -300,23 +301,21 @@ try {
     }
 
     // ── One application, not two: an impatient second press gets the first reference.
+    // Registered only after the application is safely stored, so a failed attempt is retried
+    // for real instead of being answered with the reference of something never saved.
     $dupKey = hash('sha256', strtolower($app['email']) . '|' . $app['discipline']);
-    $reference = 'TBK-' . strtoupper(bin2hex(random_bytes(3)));
-    $first = with_json($root . '/recent.json', function (array &$recent) use ($dupKey, $now, $reference) {
+    $first = with_json($root . '/recent.json', function (array &$recent) use ($dupKey, $now) {
         foreach ($recent as $k => $v) {
             if (!is_array($v) || ($v[1] ?? 0) < $now - DUP_WINDOW) {
                 unset($recent[$k]);
             }
         }
-        if (isset($recent[$dupKey])) {
-            return $recent[$dupKey][0];
-        }
-        $recent[$dupKey] = [$reference, $now];
-        return null;
+        return isset($recent[$dupKey]) ? $recent[$dupKey][0] : null;
     });
     if (is_string($first)) {
         reply(200, ['ok' => true, 'reference' => $first]);
     }
+    $reference = 'TBK-' . strtoupper(bin2hex(random_bytes(3)));
 
     // ── Quarantine rather than refuse: a bot learns nothing, and nothing real is lost.
     $meta = json_decode(field('meta', 400), true);
@@ -352,14 +351,18 @@ try {
         throw new RuntimeException('cannot store the application');
     }
     @chmod($recordPath, 0600);
+    with_json($root . '/recent.json', function (array &$recent) use ($dupKey, $now, $reference) {
+        $recent[$dupKey] = [$reference, $now];
+        return null;
+    });
 
-    if (!$quarantined) {
-        if (send_mail($app, $file)) {
-            $record['mailed'] = true;
-            @file_put_contents($recordPath, json_encode($record, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE), LOCK_EX);
-        } else {
-            log_line($root, 'mail() failed for ' . $reference . ' — the application is stored at ' . basename($recordPath));
-        }
+    // Everything is mailed — a real candidate misjudged as a bot must still be seen. Suspects
+    // are flagged in the subject so they can be filtered, and filed under quarantine/.
+    if (send_mail($app, $file, $quarantined ? '[Possible spam] ' : '')) {
+        $record['mailed'] = true;
+        @file_put_contents($recordPath, json_encode($record, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE), LOCK_EX);
+    } else {
+        log_line($root, 'mail() failed for ' . $reference . ' — the application is stored at ' . basename($recordPath));
     }
     reply(200, ['ok' => true, 'reference' => $reference]);
 } catch (Throwable $e) {
