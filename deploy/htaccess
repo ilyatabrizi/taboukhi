@@ -1,0 +1,53 @@
+# TABOUKHI — taboukhi.com (Limoo cPanel). Generated into the package by deploy/package.py;
+# edit it here, never on the host.
+Options -Indexes
+AddDefaultCharset utf-8
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+# MIME types some shared hosts are missing
+AddType video/mp4 .mp4
+AddType image/webp .webp
+AddType font/woff2 .woff2
+AddType image/svg+xml .svg
+AddType text/javascript .js
+
+RewriteEngine On
+
+# leave certificate validation alone, so AutoSSL can issue and renew
+RewriteCond %{REQUEST_URI} ^/\.well-known/ [NC]
+RewriteRule ^ - [L]
+
+# http -> https
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# www -> taboukhi.com
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # The page: everything from this origin; the one inline script pinned by its hash.
+  <FilesMatch "^index\.html$">
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' '__INLINE_SCRIPT_HASH__'; style-src 'self'; img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+  </FilesMatch>
+
+  # The film, the still, the fonts and the icons rarely change: a month.
+  <FilesMatch "\.(mp4|webp|jpg|png|svg|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  # The page, its styles and its scripts are not versioned: always revalidate (cheap 304s).
+  <FilesMatch "\.(html|css|js)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>

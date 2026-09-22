@@ -1,3 +1,4 @@
 .DS_Store
 scripts/shots/
 __pycache__/
+dist/
